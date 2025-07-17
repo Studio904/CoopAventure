@@ -7,6 +7,8 @@
 #include "InputActionValue.h"
 #include "CoopAventureCharacter.generated.h"
 
+class UVOIPTalker;
+
 
 UCLASS(config=Game)
 class ACoopAventureCharacter : public ACharacter
@@ -37,6 +39,8 @@ class ACoopAventureCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* LookAction;
 
+
+	UVOIPTalker* VOIPTalker;
 public:
 	ACoopAventureCharacter();
 	
