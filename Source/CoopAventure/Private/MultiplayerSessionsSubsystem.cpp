@@ -116,7 +116,10 @@ void UMultiplayerSessionsSubsystem::OnCreateSessionComplete(FName SessionName, b
 
 	if (bWasSuccessful)
 	{
-		GetWorld()->ServerTravel("/Game/Island/Island?listen");
+		FString Path = "/Game/Island/Island?listen";
+		Path = !GameMapPath.IsEmpty() ? FString::Printf(TEXT("%s?listen"), *GameMapPath) : Path;
+		
+		GetWorld()->ServerTravel(Path);
 
 	}
 }

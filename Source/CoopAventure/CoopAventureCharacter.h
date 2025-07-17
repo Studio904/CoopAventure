@@ -7,9 +7,6 @@
 #include "InputActionValue.h"
 #include "CoopAventureCharacter.generated.h"
 
-class UVOIPTalker;
-
-
 UCLASS(config=Game)
 class ACoopAventureCharacter : public ACharacter
 {
@@ -40,7 +37,6 @@ class ACoopAventureCharacter : public ACharacter
 	class UInputAction* LookAction;
 
 
-	UVOIPTalker* VOIPTalker;
 public:
 	ACoopAventureCharacter();
 	
