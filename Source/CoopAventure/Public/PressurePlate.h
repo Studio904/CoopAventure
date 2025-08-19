@@ -9,6 +9,9 @@
 class UStaticMeshComponent;
 class USceneComponent;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPressurePlateOnActivated);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPressurePlateOnDeactivated);
+
 UCLASS()
 class COOPAVENTURE_API APressurePlate : public AActor
 {
@@ -34,6 +37,12 @@ public:
 	UStaticMeshComponent* Mesh;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	bool Activated;
+
+	UPROPERTY(BlueprintAssignable)
+	FPressurePlateOnActivated OnActivatedDel;
+
+	UPROPERTY(BlueprintAssignable)
+	FPressurePlateOnDeactivated OnDeactivatedDel;
 
 
 };
