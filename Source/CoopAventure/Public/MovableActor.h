@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/ArrowComponent.h"
+#include "ActorComponent/Transporter.h"
 #include "MovableActor.generated.h"
 
 class USceneComponent;
-class UTransporter;
-class UArrowComponent;
 
 UCLASS()
 class COOPAVENTURE_API AMovableActor : public AActor
@@ -37,6 +37,6 @@ public:
 	UStaticMeshComponent* Mesh;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	UTransporter* Transporte;
+	UTransporter* Transporter;
 
 };
