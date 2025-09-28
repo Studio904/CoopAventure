@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
+#include "CollectableKey.h"
 #include "../CoopAventureCharacter.h"
 #include "Net/UnrealNetwork.h"
-#include "CollectableKey.h"
 
 
 // Sets default values
@@ -24,7 +24,6 @@ ACollectableKey::ACollectableKey()
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	Mesh->SetupAttachment(RootComp);
-
 	Mesh->SetIsReplicated(true);
 	Mesh->SetCollisionProfileName(FName("OverlapAllDynamic"));
 
