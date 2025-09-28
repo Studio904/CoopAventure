@@ -1,5 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
+#include "../CoopAventureCharacter.h"
 #include "Net/UnrealNetwork.h"
 #include "CollectableKey.h"
 
@@ -27,6 +27,11 @@ ACollectableKey::ACollectableKey()
 
 	Mesh->SetIsReplicated(true);
 	Mesh->SetCollisionProfileName(FName("OverlapAllDynamic"));
+
+	RotationSpeed = 100.f;
+	CollectAudio = CreateDefaultSubobject<UAudioComponent>(TEXT("CollectAudio"));
+	CollectAudio->SetupAttachment(RootComp);
+	CollectAudio->bAutoActivate = false;
 }
 
 void ACollectableKey::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -34,7 +39,7 @@ void ACollectableKey::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	//
-	DOREEPLICATION(ACollectableKey, bIsCollected);
+	DOREPLIFETIME(ACollectableKey, bIsCollected);
 }
 
 void ACollectableKey::BeginPlay()
@@ -48,10 +53,36 @@ void ACollectableKey::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (HasAuthority())
+	{
+		//Rotate the key
+		Mesh->AddRelativeRotation(FRotator(0.0f, RotationSpeed * DeltaTime, 0.0f));
+
+		TArray<AActor*> OverlappingActors;
+		Capsule->GetOverlappingActors(OverlappingActors, ACoopAventureCharacter::StaticClass());
+
+		if (!OverlappingActors.IsEmpty() && !bIsCollected) 
+		{
+			bIsCollected = true;
+			OnRep_IsCollected();
+		}
+	}
+
+
 }
 
 void ACollectableKey::OnRep_IsCollected()
 {
+	if (HasAuthority())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Key collected on server"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Key collected on client"));
+	}
+	Mesh->SetVisibility(!bIsCollected);
 
+	CollectAudio->Play();
 }
 

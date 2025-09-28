@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/AudioComponent.h"
 #include "CollectableKey.generated.h"
 
 UCLASS()
@@ -41,6 +42,12 @@ public:
 
 	UFUNCTION()
 	void OnRep_IsCollected();
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	float RotationSpeed;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UAudioComponent* CollectAudio;
 
 
 
