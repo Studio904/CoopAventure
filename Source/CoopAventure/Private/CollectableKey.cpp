@@ -75,6 +75,11 @@ void ACollectableKey::OnRep_IsCollected()
 	if (HasAuthority())
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Key collected on server"));
+		if (bIsCollected)
+		{
+			OnCollectedDel.Broadcast();
+		}
+		
 	}
 	else
 	{

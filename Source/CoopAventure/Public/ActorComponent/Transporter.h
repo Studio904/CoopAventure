@@ -41,7 +41,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetPoints(FVector NewStartPoint, FVector NewEndPoint);
 	UFUNCTION()
-	void OnPressurePlateActivated();
+	void OnTriggerActorActivated();
 	UFUNCTION()
-	void OnPressurePlateDeactivated();
+	void OnTriggerActorDeactivated();
 };

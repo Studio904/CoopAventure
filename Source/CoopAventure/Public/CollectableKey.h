@@ -10,6 +10,8 @@
 #include "CollectableKeyHolder.h"
 #include "CollectableKey.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCollectableKeyOnCollected);
+
 UCLASS()
 class COOPAVENTURE_API ACollectableKey : public AActor
 {
@@ -52,6 +54,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UAudioComponent* CollectAudio;
+
+	UPROPERTY(BlueprintAssignable)
+	FCollectableKeyOnCollected OnCollectedDel;
 
 
 
