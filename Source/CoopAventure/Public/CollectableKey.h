@@ -7,6 +7,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/AudioComponent.h"
+#include "CollectableKeyHolder.h"
 #include "CollectableKey.generated.h"
 
 UCLASS()
@@ -27,6 +28,9 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	ACollectableKeyHolder* KeyHolderRef;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	USceneComponent* RootComp;
