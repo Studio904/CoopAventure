@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "ActorComponent/Transporter.h"
 #include "PressurePlate.generated.h"
 
 class UStaticMeshComponent;
@@ -43,6 +44,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable)
 	FPressurePlateOnDeactivated OnDeactivatedDel;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	UTransporter* Transporter;
 
 
 };

@@ -22,6 +22,11 @@ void UTransporter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if (OwnerIsTriggerActor) 
+	{
+		TriggerActors.Add(GetOwner());
+	}
+
 	for (AActor *TA : TriggerActors)
 	{
 		APressurePlate* PressurePlateActor = Cast<APressurePlate>(TA);
@@ -67,14 +72,14 @@ void UTransporter::OnPressurePlateActivated()
 {
 	ActivatedTriggerCount++;
 
-	FString msg = FString::Printf(TEXT("Transporter Activated: %d"), ActivatedTriggerCount);
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::White, msg);
+	//FString msg = FString::Printf(TEXT("Transporter Activated: %d"), ActivatedTriggerCount);
+	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::White, msg);
 
 	bAllTriggerActorsTriggered = ActivatedTriggerCount >= TriggerActors.Num();
 
 	if (bAllTriggerActorsTriggered)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::White, "ALL TRIGGERS ACTIVATED!");
+		//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::White, "ALL TRIGGERS ACTIVATED!");
 	}
 }
 
@@ -82,8 +87,8 @@ void UTransporter::OnPressurePlateDeactivated()
 {
 	ActivatedTriggerCount--;
 
-	FString msg = FString::Printf(TEXT("Transporter Deactivated: %d"), ActivatedTriggerCount);
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::White, msg);
+	//FString msg = FString::Printf(TEXT("Transporter Deactivated: %d"), ActivatedTriggerCount);
+	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::White, msg);
 
 	bAllTriggerActorsTriggered = ActivatedTriggerCount >= TriggerActors.Num();
 }
